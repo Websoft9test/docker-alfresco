@@ -53,9 +53,23 @@ services:
                 memory: 1536M
         environment:
             JAVA_OPTS: " -XX:MinRAMPercentage=50 -XX:MaxRAMPercentage=80"
+            ACTIVEMQ_URL: "nio://activemq:61616"
+            FILE_STORE_URL: "http://shared-file-store:8099/alfresco/api/-default-/private/sfs/versions/1/file"
         ports:
             - 8090:8090
-
+            
+    shared-file-store:
+      image: alfresco/alfresco-shared-file-store:0.16.0
+      mem_limit: 512m
+      environment:
+        JAVA_OPTS: " -XX:MinRAMPercentage=50 -XX:MaxRAMPercentage=80"
+        scheduler.content.age.millis: 86400000
+        scheduler.cleanup.interval: 86400000
+      ports:
+        - "8099:8099"
+      volumes:
+        - shared-file-store-volume:/tmp/Alfresco/sfs
+        
     share:
         image: alfresco/alfresco-share:$APP_VERSION
         container_name: $APP_CONTAINER_NAME-share
@@ -156,3 +170,9 @@ services:
 networks:
     default:
         name: "$APP_NETWORK"
+
+volumes:
+  shared-file-store-volume:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
