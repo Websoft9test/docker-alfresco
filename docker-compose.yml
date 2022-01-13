@@ -42,8 +42,6 @@ services:
                 -Dcsrf.filter.enabled=false
                 -XX:MinRAMPercentage=50 -XX:MaxRAMPercentage=80
                 "
-        volumes:
-          - alf-content:/usr/local/tomcat/alf_data/contentstore
           
     transform-core-aio:
         image: alfresco/alfresco-transform-core-aio:2.3.10
