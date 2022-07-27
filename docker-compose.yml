@@ -27,7 +27,7 @@ services:
         -Dmetadata-keystore.metadata.algorithm=DESede
         "
       JAVA_OPTS: "
-        -Dalfresco_user_store.adminpassword=$APP_PASSWORD
+        -Dalfresco_user_store.adminpassword=$APP_ENCRYPT_PASSWORD
         -Ddb.driver=org.postgresql.Driver
         -Ddb.username=alfresco
         -Ddb.password=$DB_POSTGRESQL_PASSWORD
