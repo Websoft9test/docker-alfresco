@@ -7,4 +7,3 @@ echo "$1" > /tmp/password
 cd /data/apps/alfresco/src
 python3 encryption.py > /dev/null
 cat /tmp/password
-
